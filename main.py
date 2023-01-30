@@ -14,7 +14,7 @@ def main():
     all_comments = []
     all_comments.extend(get_top_comments(youtube, video_id))
     all_comments.extend(get_replies_comments(youtube, video_id))
-    
+    print(all_comments)
 
 if __name__ == '__main__':
     main()
