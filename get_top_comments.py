@@ -2,7 +2,6 @@ import re
 from googleapiclient.errors import HttpError
 
 def get_top_comments(youtube, video_id):
-
     retrieved_top_comments = []
     i = 0
     try:
@@ -18,7 +17,7 @@ def get_top_comments(youtube, video_id):
                     return retrieved_top_comments
             request = youtube.commentThreads().list_next(request, response)
     except HttpError as err:
-        if err.resp.status in [403, 404, 500, 503]:
-            print('Error: ', err.resp.status)
+        if err.resp.status:
+            print('Error:', err.resp.status)
             return retrieved_top_comments
     return retrieved_top_comments
