@@ -5,9 +5,18 @@ import re
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 
 #Create an instance of the FastAPI class
 app = FastAPI()
+#Use the CORS middleware to allow requests from the frontend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # import modules from other files
 from get_replies_comments import get_replies_comments
@@ -30,13 +39,12 @@ class VideoData(BaseModel):
 async def sentiment_analysis(data: VideoData):
     
     url = data.url
-
+    
     match = re.search(r"v=([\w-]+)", url)
 
     if match:
         video_id = match.group(1)
     else:
-    
         return {"Error": "Invalid URL"}
     
     all_comments = []
