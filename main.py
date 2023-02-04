@@ -12,7 +12,7 @@ app = FastAPI()
 #Use the CORS middleware to allow requests from the frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["https://enchanting-biscochitos-5e2d8c.netlify.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
